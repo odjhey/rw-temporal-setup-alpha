@@ -8,7 +8,7 @@ generator client {
   binaryTargets = "native"
 }
 
-model TestModel {
-  id    Int     @id @default(autoincrement())
-  desc  String?
+model WorkflowRun {
+  id                 Int    @id @default(autoincrement())
+  temporalWorkflowId String
 }

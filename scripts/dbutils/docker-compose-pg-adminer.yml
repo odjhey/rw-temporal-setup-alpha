@@ -1,0 +1,18 @@
+version: '3.1'
+services :
+  db:
+    image: postgres:10-alpine
+    restart: always
+    ports:
+      - "5439:5432"
+    environment:
+      POSTGRES_USER: awesome
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+  admin:
+    image: adminer
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8390:8080
