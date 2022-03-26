@@ -10,3 +10,4 @@
 - [ ] feat: multiple processing state
 - [ ] test cancel/retry
 - [ ] play with temporal! (see that the ts-sdk is enough, may have to go with the golang-sdk otherwise)
+- [ ] VERY IMPORTANT: try to deploy multiple workers in separate machines
