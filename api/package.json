@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@redwoodjs/api": "0.50.0",
-    "@redwoodjs/graphql-server": "0.50.0"
+    "@redwoodjs/graphql-server": "0.50.0",
+    "temporal-workflows": "*",
+    "temporalio": "0.19.x"
   }
 }

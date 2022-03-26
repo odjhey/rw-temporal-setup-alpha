@@ -1,6 +1,7 @@
 import type { Prisma } from '@prisma/client'
 
 import { db } from 'src/lib/db'
+import * as temporalClient from 'src/lib/temporalClient'
 
 export const workflowRuns = () => {
   return db.workflowRun.findMany()
@@ -17,6 +18,16 @@ interface CreateWorkflowRunArgs {
 }
 
 export const createWorkflowRun = ({ input }: CreateWorkflowRunArgs) => {
+  try {
+    console.log('startt')
+    temporalClient.runWorkflow().catch((err) => {
+      console.error('err', err)
+    })
+  } catch (err) {
+    console.error('catch err', err)
+  }
+  console.log('done')
+
   return db.workflowRun.create({
     data: input,
   })
