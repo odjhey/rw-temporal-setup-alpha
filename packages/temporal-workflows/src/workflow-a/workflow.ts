@@ -11,7 +11,7 @@ const { activityB } = proxyActivities<typeof activitiesB>({
 })
 
 export async function WorkflowA(name: string): Promise<string> {
-  console.log('Hello from WorkflowA')
+  console.log('Hello from WorkflowA dn')
   const res1 = await activityA(name)
   await sleep(100)
   const res2 = await activityB(name)

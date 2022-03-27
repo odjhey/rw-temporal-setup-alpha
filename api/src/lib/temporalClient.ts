@@ -24,3 +24,15 @@ export async function runWorkflow() {
   console.log(result) // // [api-server] A: Hello, Temporal!, B: Hello, Temporal!
   return result
 }
+
+export function getWfClient() {
+  const connection = new Connection() // Connect to localhost with default ConnectionOptions.
+  // In production, pass options to the Connection constructor to configure TLS and other settings.
+  // This is optional but we leave this here to remind you there is a gRPC connection being established.
+
+  const client = new WorkflowClient(connection.service, {
+    // In production you will likely specify `namespace` here; it is 'default' if omitted
+  })
+
+  return client
+}

@@ -2,6 +2,8 @@ export const schema = gql`
   type WorkflowRun {
     id: Int!
     temporalWorkflowId: String!
+    temporalStatus: String
+    temporalWfType: String
   }
 
   type Query {
@@ -22,5 +24,6 @@ export const schema = gql`
     updateWorkflowRun(id: Int!, input: UpdateWorkflowRunInput!): WorkflowRun!
       @requireAuth
     deleteWorkflowRun(id: Int!): WorkflowRun! @requireAuth
+    unblock(id: Int!): WorkflowRun! @requireAuth
   }
 `
