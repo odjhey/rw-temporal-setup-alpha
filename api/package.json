@@ -5,7 +5,11 @@
   "dependencies": {
     "@redwoodjs/api": "0.50.0",
     "@redwoodjs/graphql-server": "0.50.0",
+    "minio": "^7.0.26",
     "temporal-workflows": "*",
     "temporalio": "0.19.x"
+  },
+  "devDependencies": {
+    "@types/minio": "^7.0.12"
   }
 }

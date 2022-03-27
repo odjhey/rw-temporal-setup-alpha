@@ -7,15 +7,8 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 
-
-
 const WorkflowRunForm = (props) => {
   const onSubmit = (data) => {
-
-  
-    
-    
-  
     props.onSave(data, props?.workflowRun?.id)
   }
 
@@ -28,7 +21,7 @@ const WorkflowRunForm = (props) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-      
+
         <Label
           name="temporalWorkflowId"
           className="rw-label"
@@ -36,23 +29,19 @@ const WorkflowRunForm = (props) => {
         >
           Temporal workflow id
         </Label>
-        
-          <TextField
-            name="temporalWorkflowId"
-            defaultValue={props.workflowRun?.temporalWorkflowId}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <TextField
+          name="temporalWorkflowId"
+          defaultValue={props.workflowRun?.temporalWorkflowId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="temporalWorkflowId" className="rw-field-error" />
 
         <div className="rw-button-group">
-          <Submit
-            disabled={props.loading}
-            className="rw-button rw-button-blue"
-          >
+          <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save
           </Submit>
         </div>

@@ -13,6 +13,7 @@ import WorkflowRunsLayout from 'src/layouts/WorkflowRunsLayout'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/upload" page={UploadPage} name="upload" />
       <Set wrap={WorkflowRunsLayout}>
         <Route path="/workflow-runs/new" page={WorkflowRunNewWorkflowRunPage} name="newWorkflowRun" />
         <Route path="/workflow-runs/{id:Int}/edit" page={WorkflowRunEditWorkflowRunPage} name="editWorkflowRun" />
