@@ -9094,7 +9094,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"concurrently@npm:7.0.0":
+"concurrently@npm:7.0.0, concurrently@npm:^7.0.0":
   version: 7.0.0
   resolution: "concurrently@npm:7.0.0"
   dependencies:
@@ -20227,6 +20227,7 @@ __metadata:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     "@redwoodjs/core": 0.50.0
+    concurrently: ^7.0.0
   languageName: unknown
   linkType: soft
 

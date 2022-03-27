@@ -7,8 +7,14 @@
       "packages/*"
     ]
   },
+  "scripts": {
+    "temporal.start": "yarn build.workflows & concurrently --kill-others-on-fail -n 'worker' \"yarn worker\"",
+    "worker": "yarn workspace temporal-worker start",
+    "build.workflows": "yarn workspace temporal-workflows build.watch"
+  },
   "devDependencies": {
-    "@redwoodjs/core": "0.50.0"
+    "@redwoodjs/core": "0.50.0",
+    "concurrently": "^7.0.0"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config",
