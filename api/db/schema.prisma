@@ -12,3 +12,9 @@ model WorkflowRun {
   id                 Int    @id @default(autoincrement())
   temporalWorkflowId String
 }
+
+model WorkflowRunSource {
+  id   Int    @id @default(autoincrement())
+  slug String
+  // link to workflow run
+}

@@ -8,11 +8,18 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Set, Router, Route } from '@redwoodjs/router'
+import WorkflowRunSourcesLayout from 'src/layouts/WorkflowRunSourcesLayout'
 import WorkflowRunsLayout from 'src/layouts/WorkflowRunsLayout'
 
 const Routes = () => {
   return (
     <Router>
+      <Set wrap={WorkflowRunSourcesLayout}>
+        <Route path="/workflow-run-sources/new" page={WorkflowRunSourceNewWorkflowRunSourcePage} name="newWorkflowRunSource" />
+        <Route path="/workflow-run-sources/{id:Int}/edit" page={WorkflowRunSourceEditWorkflowRunSourcePage} name="editWorkflowRunSource" />
+        <Route path="/workflow-run-sources/{id:Int}" page={WorkflowRunSourceWorkflowRunSourcePage} name="workflowRunSource" />
+        <Route path="/workflow-run-sources" page={WorkflowRunSourceWorkflowRunSourcesPage} name="workflowRunSources" />
+      </Set>
       <Route path="/upload" page={UploadPage} name="upload" />
       <Set wrap={WorkflowRunsLayout}>
         <Route path="/workflow-runs/new" page={WorkflowRunNewWorkflowRunPage} name="newWorkflowRun" />

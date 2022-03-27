@@ -14,3 +14,7 @@
 - [ ] IMPORTANT: workflow run type, to be able to do pre validations before trying to invode workflow signals/queries
 - [ ] auto generate workflowServices
 - [ ] auto generate workflows
+- [ ] decide a bucket hierarchy
+- [ ] modularize object store access (extract common operations to /lib)
+- [ ] restrict presigned urls, add timeouts, restrict access keys, etc
+- [ ] show meta data in gql\`type fileSources\`
