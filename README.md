@@ -1,6 +1,7 @@
 ## stack
 - https://redwoodjs.com/
 - https://temporal.io/
+- https://min.io/
 
 ## todo
 - [ ] setup husky
