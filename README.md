@@ -23,3 +23,4 @@
 - [ ] create sharable code packages/object-store-client?
 - [ ] create sharable code packages/database-client? client or functions
 - [ ] lol iz works, read line from s3/minio
+- [ ] fun feature, offer download same file but with comments in the last cells. (also with formatting ng red if error para cool kaso low prio)

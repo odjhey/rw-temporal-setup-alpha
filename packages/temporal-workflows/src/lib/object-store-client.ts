@@ -1,5 +1,6 @@
 import * as Minio from 'minio'
 import * as Readline from 'readline'
+import { Readable } from 'stream'
 
 export const getClient = () => {
   const client = new Minio.Client({
@@ -36,6 +37,15 @@ export const readFile = async (
       resolve([])
     })
   })
+}
+
+// see if better to accept events instead of returning the stream
+export const readFileStream = async (
+  client: Minio.Client,
+  { bucket, filePath }: { bucket: string; filePath: string }
+): Promise<Readable> => {
+  const readStream = await client.getObject(bucket, filePath)
+  return readStream
 }
 
 export const getFileList = async (client: Minio.Client) => {

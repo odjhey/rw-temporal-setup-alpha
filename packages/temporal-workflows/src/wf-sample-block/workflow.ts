@@ -1,7 +1,10 @@
 import * as wf from '@temporalio/workflow'
 import type * as activities from './activities'
 
-const { activityReadLine } = wf.proxyActivities<typeof activities>({
+const {
+  // activityReadLine,
+  activityReadNumbers,
+} = wf.proxyActivities<typeof activities>({
   startToCloseTimeout: '1 minute',
 })
 
@@ -25,8 +28,9 @@ export async function WorkflowUnblockOrCancel({
   try {
     await wf.condition(() => !isBlocked)
     status = 'READING-FILE'
-    await wf.sleep(10000)
-    await activityReadLine({ bucket, filePath })
+    await wf.sleep(3000)
+    // await activityReadLine({ bucket, filePath })
+    await activityReadNumbers({ bucket, filePath })
     status = 'DONE'
   } catch (err) {
     if (err instanceof wf.CancelledFailure) {

@@ -32,7 +32,6 @@ const WorkflowRun = ({ workflowRun }) => {
   const [unblockWorkflowRun] = useMutation(UNBLOCK_WORKFLOW_RUN_MUTATION, {
     onCompleted: () => {
       toast.success('WorkflowRun unblocked')
-      navigate(routes.workflowRuns())
     },
     onError: (error) => {
       toast.error(error.message)
