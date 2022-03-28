@@ -28,6 +28,7 @@ export async function runWorkflow({
       {
         bucket,
         filePath,
+        wfId,
       },
     ],
   })

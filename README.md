@@ -24,3 +24,5 @@
 - [ ] create sharable code packages/database-client? client or functions
 - [ ] lol iz works, read line from s3/minio
 - [ ] fun feature, offer download same file but with comments in the last cells. (also with formatting ng red if error para cool kaso low prio)
+- [ ] need a key reference (aside from index) for each file (to be able to cross check errors/results, etc)
+- [ ] figure how to padd env vars to activities/workers

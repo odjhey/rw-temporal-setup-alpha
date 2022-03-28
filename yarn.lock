@@ -22395,9 +22395,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "temporal-workflows@workspace:packages/temporal-workflows"
   dependencies:
+    "@prisma/client": 3.11.0
     "@tsconfig/node16": ^1.0.0
     "@types/minio": ^7.0.12
     minio: ^7.0.26
+    prisma: 3.11.0
     temporalio: 0.19.x
     typescript: ^4.4.2
     xlsx: ^0.18.5

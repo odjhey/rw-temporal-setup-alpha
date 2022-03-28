@@ -10,6 +10,7 @@ export const QUERY = gql`
       temporalWorkflowId
       temporalStatus
       fileInput
+      resultId
     }
   }
 `

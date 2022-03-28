@@ -3,7 +3,7 @@ import { Readable } from 'stream'
 import { z } from 'zod'
 
 export const streamReader = async (readable: Readable) => {
-  await new Promise((resolve, reject) => {
+  return await new Promise((resolve, reject) => {
     const buffers: any[] = []
 
     readable.on('data', function (data) {
@@ -21,39 +21,44 @@ export const streamReader = async (readable: Readable) => {
       )
       // console.log('first sheet', jsa)
 
+      const zodNumberOrString = z.string().or(z.number())
       const epodSchema = z.array(
         z.object({
-          Delivery: z.string(),
-          ScheduledDate: z.string(),
-          ScheduledTime: z.string(),
+          Delivery: z.string().or(z.number()),
+          ScheduledDate: z.string().or(z.number()),
+          ScheduledTime: z.string().or(z.number()),
           CustomerName: z.string(),
           CustomerAddress: z.string(),
           CustomerEmail: z.string(),
-          CustomerMobile: z.string(),
-          ShipmentNumber: z.string(),
-          DriverId: z.string(),
+          CustomerMobile: z.string().or(z.number()),
+          ShipmentNumber: z.string().or(z.number()),
+          UserId: z.string(),
           PlateNumber: z.string(),
           Trucker: z.string(),
           Porter: z.string(),
           Source: z.string(),
-          ItemNumber: z.string(),
+          ItemNumber: z.number(),
           Material: z.string(),
-          MaterialNumber: z.string(),
-          PricePerUnit: z.string(),
+          MaterialNumber: z.number(),
+          PricePerUnit: z.number().optional(),
           UoM: z.string(),
-          Quantity: z.string(),
+          Quantity: z.number(),
           Route: z.string(),
-          Invoice: z.string(),
-          Barcode: z.string(),
-          Batch: z.string(),
+          Invoice: z.string().or(z.number()),
+          Barcode: z.string().or(z.number()),
+          Batch: zodNumberOrString,
         })
       )
 
       const res = epodSchema.safeParse(jsa)
-      console.log('resss', res)
 
       if (res.success === false) {
-        console.log(res.error.issues)
+        resolve({
+          error: res.error,
+          data: jsa.map((d: any, idx) => ({ ...d, _idx: idx })),
+        })
+      } else {
+        resolve({ data: res.data, error: undefined })
       }
 
       /*

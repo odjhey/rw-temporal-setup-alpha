@@ -1,5 +1,6 @@
 import { readFile, getClient, readFileStream } from '../lib/object-store-client'
 import { streamReader } from '../lib/readers'
+import { saveResult } from '../lib/repos/workflow-run-results'
 
 export async function activityReadLine({
   bucket,
@@ -14,14 +15,17 @@ export async function activityReadLine({
 }
 
 export async function activityReadNumbers({
+  wfId,
   bucket,
   filePath,
 }: {
+  wfId: string
   bucket: string
   filePath: string
-}): Promise<void> {
+}): Promise<any> {
   console.log('hello from activity readline ', `${bucket} ${filePath}`)
 
   const readable = await readFileStream(getClient(), { bucket, filePath })
-  await streamReader(readable)
+  const result = await streamReader(readable)
+  return await saveResult({ wfId, result })
 }

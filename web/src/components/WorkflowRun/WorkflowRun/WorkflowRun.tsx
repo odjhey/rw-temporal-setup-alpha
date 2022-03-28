@@ -71,6 +71,16 @@ const WorkflowRun = ({ workflowRun }) => {
               <th>Temporal Status</th>
               <td>{workflowRun.temporalStatus}</td>
             </tr>
+            <tr>
+              <th>Result Id</th>
+              <td>
+                <Link
+                  to={routes.workflowRunResult({ id: workflowRun.resultId })}
+                >
+                  {workflowRun.resultId}
+                </Link>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

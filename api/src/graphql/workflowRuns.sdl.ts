@@ -5,6 +5,7 @@ export const schema = gql`
     temporalStatus: String
     temporalWfType: String
     fileInput: String!
+    resultId: Int
   }
 
   type Query {

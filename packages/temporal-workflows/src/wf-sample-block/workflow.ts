@@ -15,9 +15,11 @@ export const statusQuery = wf.defineQuery<string>('status')
 export async function WorkflowUnblockOrCancel({
   bucket,
   filePath,
+  wfId,
 }: {
   bucket: string
   filePath: string
+  wfId: string
 }): Promise<void> {
   let isBlocked = true
   let status = 'PENDING'
@@ -28,10 +30,11 @@ export async function WorkflowUnblockOrCancel({
   try {
     await wf.condition(() => !isBlocked)
     status = 'READING-FILE'
-    await wf.sleep(3000)
     // await activityReadLine({ bucket, filePath })
-    await activityReadNumbers({ bucket, filePath })
+    const result = await activityReadNumbers({ bucket, filePath, wfId })
     status = 'DONE'
+
+    return result
   } catch (err) {
     if (err instanceof wf.CancelledFailure) {
       console.log('Cancelled')
