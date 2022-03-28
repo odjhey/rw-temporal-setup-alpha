@@ -5,7 +5,7 @@ const {
   // activityReadLine,
   activityReadNumbers,
 } = wf.proxyActivities<typeof activities>({
-  startToCloseTimeout: '1 minute',
+  startToCloseTimeout: '10 minute',
 })
 
 export const unblockSignal = wf.defineSignal('unblock')

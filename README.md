@@ -1,9 +1,11 @@
 ## stack
+
 - https://redwoodjs.com/
 - https://temporal.io/
 - https://min.io/
 
 ## todo
+
 - [ ] setup husky
 - [ ] setup linter
 - [ ] setup prettier
@@ -26,3 +28,8 @@
 - [ ] fun feature, offer download same file but with comments in the last cells. (also with formatting ng red if error para cool kaso low prio)
 - [ ] need a key reference (aside from index) for each file (to be able to cross check errors/results, etc)
 - [ ] figure how to padd env vars to activities/workers
+- [ ] think twice about storing JSON parsed big files (tested 25mb), not worth? think of how we'll use the stored jsonb, why store
+
+# why store parsed file in DB
+
+1. one reason is so we can inspect, issues might be related to serialization/deserialization from format to format, thing excel time field serialized to json becomes weird

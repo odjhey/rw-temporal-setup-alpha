@@ -1,6 +1,7 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { Link, routes, navigate } from '@redwoodjs/router'
+import { Stepper, Container } from '@mantine/core'
 
 const DELETE_WORKFLOW_RUN_MUTATION = gql`
   mutation DeleteWorkflowRunMutation($id: Int!) {
@@ -49,6 +50,17 @@ const WorkflowRun = ({ workflowRun }) => {
     }
   }
 
+  const getStep = (status) => {
+    switch (status) {
+      case 'PENDING':
+        return 1
+      case 'DONE':
+        return 4
+      default:
+        return 2
+    }
+  }
+
   return (
     <>
       <div className="rw-segment">
@@ -84,6 +96,23 @@ const WorkflowRun = ({ workflowRun }) => {
           </tbody>
         </table>
       </div>
+
+      <Container size={'lg'}>
+        <Stepper active={getStep(workflowRun.temporalStatus)} breakpoint="sm">
+          <Stepper.Step label="First step" description="Input File Loaded">
+            Step 1 content: Pending
+          </Stepper.Step>
+          <Stepper.Step label="Second step" description="Validate">
+            Step 2 content: Running
+          </Stepper.Step>
+          <Stepper.Step label="Third step" description="Recording Result">
+            Step 2 content: Running
+          </Stepper.Step>
+          <Stepper.Step label="End" description="Done"></Stepper.Step>
+          <Stepper.Completed>Completed</Stepper.Completed>
+        </Stepper>
+      </Container>
+
       <nav className="rw-button-group">
         <button
           type="button"

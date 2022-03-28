@@ -21,6 +21,8 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error.message}</div>
 )
 
-export const Success = ({ workflowRunResult }: CellSuccessProps<FindWorkflowRunResultById>) => {
+export const Success = ({
+  workflowRunResult,
+}: CellSuccessProps<FindWorkflowRunResultById>) => {
   return <WorkflowRunResult workflowRunResult={workflowRunResult} />
 }

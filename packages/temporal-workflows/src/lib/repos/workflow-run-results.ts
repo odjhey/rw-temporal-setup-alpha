@@ -19,5 +19,6 @@ export const saveResult = async ({
     where: { temporalWorkflowId: wfId },
     data: { resultId: resultDbEntry.id },
   })
+
   return resultDbEntry
 }

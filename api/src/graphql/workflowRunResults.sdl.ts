@@ -2,7 +2,7 @@ export const schema = gql`
   type WorkflowRunResult {
     id: Int!
     temporalWorkflowId: String!
-    result: JSON!
+    result: JSON
   }
 
   type Query {
