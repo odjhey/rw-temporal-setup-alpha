@@ -3,6 +3,7 @@ import {
   isBlockedQuery,
   WorkflowUnblockOrCancel,
   unblockSignal,
+  statusQuery,
 } from 'temporal-workflows/lib/all-workflows'
 
 export async function runWorkflow({
@@ -35,6 +36,14 @@ export async function runWorkflow({
 }
 
 export async function queryStatus({ wfId }) {
+  const client = getWfClient()
+
+  const handle = await client.getHandle(wfId)
+
+  return handle.query(statusQuery)
+}
+
+export async function queryBlockedStatus({ wfId }) {
   const client = getWfClient()
 
   const handle = await client.getHandle(wfId)

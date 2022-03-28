@@ -20,7 +20,7 @@ export const workflowRun = async ({
     })
     return {
       ...wfRunDbEntry,
-      temporalStatus: temporalStatus ? 'blocked' : 'NOTB',
+      temporalStatus,
     }
   } catch (err) {
     return {
@@ -68,12 +68,17 @@ export const unblock = async ({ id }) => {
   })
 
   try {
-    const blockedStat = WfSomeSome.unblockStatus({
+    await WfSomeSome.unblockStatus({
       wfId: `${wfRun.temporalWorkflowId}`,
     }).catch((err) => {
       console.error('err', err)
     })
-    return { ...wfRun, temporalStatus: blockedStat ? 'blocked' : 'NOTB' }
+
+    const temporalStatus = await WfSomeSome.queryStatus({
+      wfId: `${wfRun.temporalWorkflowId}`,
+    })
+
+    return { ...wfRun, temporalStatus }
   } catch (err) {
     console.error('catch err', err)
   }

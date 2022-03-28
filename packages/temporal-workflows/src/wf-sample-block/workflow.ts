@@ -7,6 +7,7 @@ const { activityReadLine } = wf.proxyActivities<typeof activities>({
 
 export const unblockSignal = wf.defineSignal('unblock')
 export const isBlockedQuery = wf.defineQuery<boolean>('isBlocked')
+export const statusQuery = wf.defineQuery<string>('status')
 
 export async function WorkflowUnblockOrCancel({
   bucket,
@@ -16,14 +17,17 @@ export async function WorkflowUnblockOrCancel({
   filePath: string
 }): Promise<void> {
   let isBlocked = true
+  let status = 'PENDING'
   wf.setHandler(unblockSignal, () => void (isBlocked = false))
   wf.setHandler(isBlockedQuery, () => isBlocked)
-
-  await activityReadLine({ bucket, filePath })
+  wf.setHandler(statusQuery, () => status)
 
   try {
     await wf.condition(() => !isBlocked)
-    console.log('unblocked')
+    status = 'READING-FILE'
+    await wf.sleep(10000)
+    await activityReadLine({ bucket, filePath })
+    status = 'DONE'
   } catch (err) {
     if (err instanceof wf.CancelledFailure) {
       console.log('Cancelled')
