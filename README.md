@@ -4,6 +4,10 @@
 - https://temporal.io/
 - https://min.io/
 
+### checkout
+- https://danfo.jsdata.org/
+- https://github.com/data-forge/data-forge-ts
+
 ## todo
 
 - [ ] setup husky
@@ -33,3 +37,24 @@
 # why store parsed file in DB
 
 1. one reason is so we can inspect, issues might be related to serialization/deserialization from format to format, thing excel time field serialized to json becomes weird
+
+
+# workflow definitions
+wf definitions are modeled using code sdk, how do we make dynamic runs that looks like below
+
+validate x10
+
+## we could probably do something like
+1. analyze file/s, spit out facts, line count, columns, dupes, min-max, etc etc
+1. activity 1: read database for necessary steps, make an execution plan, return
+2. in workflow: loop at execution plan, executing activities accordingly inside the plan
+3. done?
+
+### things to consider
+1. we can only resume in the activity level, consider this when designing activities
+2. use activity heartbeats for long processes
+
+
+## notes
+1. try to implement the source-sink pattern (or pumps), see https://github.com/agmen-hu/node-datapumps for inspiration
+1. we get value in a common module to get file url (remote csv), as most libs operate in such manner
