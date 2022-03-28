@@ -11,7 +11,7 @@ export const schema = gql`
   type Query {
     workflowRunSources: [WorkflowRunSource!]! @requireAuth
     workflowRunSource(id: Int!): WorkflowRunSource @requireAuth
-    fileSources: [FileSource!]!
+    fileSources: [FileSource!]! @requireAuth
   }
 
   input CreateWorkflowRunSourceInput {

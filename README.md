@@ -18,3 +18,7 @@
 - [ ] modularize object store access (extract common operations to /lib)
 - [ ] restrict presigned urls, add timeouts, restrict access keys, etc
 - [ ] show meta data in gql\`type fileSources\`
+- [ ] enable auth early on, dont forget created_by, updated_by, created_date fields
+- [ ] create sharable code packages/object-store-client?
+- [ ] create sharable code packages/database-client? client or functions
+- [ ] lol iz works, read line from s3/minio

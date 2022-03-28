@@ -5,12 +5,30 @@ import {
   unblockSignal,
 } from 'temporal-workflows/lib/all-workflows'
 
-export async function runWorkflow({ wfId }) {
+export async function runWorkflow({
+  wfId,
+  args,
+}: {
+  wfId: string
+  args: { fileInput: string }
+}) {
   const client = getWfClient()
+
+  const values = args.fileInput.split('/')
+  const bucket = values[0]
+  const filePath = values.splice(1).join('/')
+
+  console.log('buasdkfjl', { bucket, filePath })
 
   const result = await client.start(WorkflowUnblockOrCancel, {
     taskQueue: 'monorepo',
     workflowId: `${wfId}`, // TODO: remember to replace this with a meaningful business ID
+    args: [
+      {
+        bucket,
+        filePath,
+      },
+    ],
   })
   console.log(result) // // [api-server] A: Hello, Temporal!, B: Hello, Temporal!
   return result

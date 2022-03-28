@@ -2,6 +2,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { navigate, routes } from '@redwoodjs/router'
 import WorkflowRunForm from 'src/components/WorkflowRun/WorkflowRunForm'
+import useSelections from 'src/hooks/useSelections'
 
 const CREATE_WORKFLOW_RUN_MUTATION = gql`
   mutation CreateWorkflowRunMutation($input: CreateWorkflowRunInput!) {
@@ -12,15 +13,20 @@ const CREATE_WORKFLOW_RUN_MUTATION = gql`
 `
 
 const NewWorkflowRun = () => {
-  const [createWorkflowRun, { loading, error }] = useMutation(CREATE_WORKFLOW_RUN_MUTATION, {
-    onCompleted: () => {
-      toast.success('WorkflowRun created')
-      navigate(routes.workflowRuns())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const { data } = useSelections()
+
+  const [createWorkflowRun, { loading, error }] = useMutation(
+    CREATE_WORKFLOW_RUN_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('WorkflowRun created')
+        navigate(routes.workflowRuns())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input) => {
     createWorkflowRun({ variables: { input } })
@@ -32,7 +38,12 @@ const NewWorkflowRun = () => {
         <h2 className="rw-heading rw-heading-secondary">New WorkflowRun</h2>
       </header>
       <div className="rw-segment-main">
-        <WorkflowRunForm onSave={onSave} loading={loading} error={error} />
+        <WorkflowRunForm
+          selections={{ files: data }}
+          onSave={onSave}
+          loading={loading}
+          error={error}
+        />
       </div>
     </div>
   )

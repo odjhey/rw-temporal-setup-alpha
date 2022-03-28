@@ -10,6 +10,7 @@ export const QUERY = gql`
     workflowRuns {
       id
       temporalWorkflowId
+      fileInput
     }
   }
 `
@@ -20,10 +21,7 @@ export const Empty = () => {
   return (
     <div className="rw-text-center">
       {'No workflowRuns yet. '}
-      <Link
-        to={routes.newWorkflowRun()}
-        className="rw-link"
-      >
+      <Link to={routes.newWorkflowRun()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>
@@ -34,6 +32,8 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error.message}</div>
 )
 
-export const Success = ({ workflowRuns }: CellSuccessProps<FindWorkflowRuns>) => {
+export const Success = ({
+  workflowRuns,
+}: CellSuccessProps<FindWorkflowRuns>) => {
   return <WorkflowRuns workflowRuns={workflowRuns} />
 }

@@ -11,6 +11,7 @@ generator client {
 model WorkflowRun {
   id                 Int    @id @default(autoincrement())
   temporalWorkflowId String
+  fileInput          String
 }
 
 model WorkflowRunSource {

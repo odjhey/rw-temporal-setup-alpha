@@ -14,10 +14,19 @@ export const workflowRun = async ({
   const wfRunDbEntry = await db.workflowRun.findUnique({
     where: { id },
   })
-  const temporalStatus = await WfSomeSome.queryStatus({ wfId: `${id}` })
-  return {
-    ...wfRunDbEntry,
-    temporalStatus: temporalStatus ? 'blocked' : 'NOTB',
+  try {
+    const temporalStatus = await WfSomeSome.queryStatus({
+      wfId: `${wfRunDbEntry.temporalWorkflowId}`,
+    })
+    return {
+      ...wfRunDbEntry,
+      temporalStatus: temporalStatus ? 'blocked' : 'NOTB',
+    }
+  } catch (err) {
+    return {
+      ...wfRunDbEntry,
+      temporalStatus: 'UNKNOWN',
+    }
   }
 }
 
@@ -40,7 +49,10 @@ export const createWorkflowRun = async ({ input }: CreateWorkflowRunArgs) => {
   }
   */
   try {
-    WfSomeSome.runWorkflow({ wfId: wfRunDbEntry.id }).catch((err) => {
+    WfSomeSome.runWorkflow({
+      wfId: wfRunDbEntry.temporalWorkflowId,
+      args: { fileInput: wfRunDbEntry.fileInput },
+    }).catch((err) => {
       console.error('err', err)
     })
   } catch (err) {
@@ -56,11 +68,11 @@ export const unblock = async ({ id }) => {
   })
 
   try {
-    const blockedStat = WfSomeSome.unblockStatus({ wfId: `${wfRun.id}` }).catch(
-      (err) => {
-        console.error('err', err)
-      }
-    )
+    const blockedStat = WfSomeSome.unblockStatus({
+      wfId: `${wfRun.temporalWorkflowId}`,
+    }).catch((err) => {
+      console.error('err', err)
+    })
     return { ...wfRun, temporalStatus: blockedStat ? 'blocked' : 'NOTB' }
   } catch (err) {
     console.error('catch err', err)

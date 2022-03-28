@@ -4,6 +4,7 @@ export const schema = gql`
     temporalWorkflowId: String!
     temporalStatus: String
     temporalWfType: String
+    fileInput: String!
   }
 
   type Query {
@@ -13,6 +14,7 @@ export const schema = gql`
 
   input CreateWorkflowRunInput {
     temporalWorkflowId: String!
+    fileInput: String!
   }
 
   input UpdateWorkflowRunInput {

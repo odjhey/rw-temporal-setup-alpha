@@ -1,3 +1,4 @@
+import { Select } from '@mantine/core'
 import {
   Form,
   FormError,
@@ -5,6 +6,7 @@ import {
   Label,
   TextField,
   Submit,
+  useForm,
 } from '@redwoodjs/forms'
 
 const WorkflowRunForm = (props) => {
@@ -12,9 +14,12 @@ const WorkflowRunForm = (props) => {
     props.onSave(data, props?.workflowRun?.id)
   }
 
+  const formMethods = useForm()
+  const fileSelect = formMethods.register('fileInput', { required: true })
+
   return (
     <div className="rw-form-wrapper">
-      <Form onSubmit={onSubmit} error={props.error}>
+      <Form formMethods={formMethods} onSubmit={onSubmit} error={props.error}>
         <FormError
           error={props.error}
           wrapperClassName="rw-form-error-wrapper"
@@ -39,6 +44,25 @@ const WorkflowRunForm = (props) => {
         />
 
         <FieldError name="temporalWorkflowId" className="rw-field-error" />
+
+        <Label
+          name={fileSelect.name}
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Input file
+        </Label>
+
+        <Select
+          name={fileSelect.name}
+          onChange={(value) => {
+            fileSelect.onChange({
+              target: { value, name: fileSelect.name },
+            })
+          }}
+          data={props.selections.files}
+        ></Select>
+        <FieldError name={fileSelect.name} className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

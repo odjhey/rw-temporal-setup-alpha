@@ -22344,6 +22344,8 @@ __metadata:
   resolution: "temporal-workflows@workspace:packages/temporal-workflows"
   dependencies:
     "@tsconfig/node16": ^1.0.0
+    "@types/minio": ^7.0.12
+    minio: ^7.0.26
     temporalio: 0.19.x
     typescript: ^4.4.2
     zod: ^3.14.2
