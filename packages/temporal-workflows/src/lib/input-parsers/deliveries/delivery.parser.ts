@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import type { TParseResult } from '../../types/util'
+import type { TParseResult } from '../../../types/util'
 
 export const parse = (input: any): TParseResult<any, any> => {
   const schema = z.object({

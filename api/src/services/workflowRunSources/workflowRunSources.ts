@@ -2,8 +2,11 @@ import type { Prisma } from '@prisma/client'
 
 import { db } from 'src/lib/db'
 import { getClient, getFileList } from 'src/lib/objectStoreClient'
+import * as WfEnvTest from 'src/workflowServices/wfEnvTest'
 
-export const workflowRunSources = () => {
+export const workflowRunSources = async () => {
+  await WfEnvTest.runWorkflow({ wfId: `some-test-${Date.now()}`, args: '' })
+
   return db.workflowRunSource.findMany()
 }
 

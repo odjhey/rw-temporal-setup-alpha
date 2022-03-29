@@ -1,5 +1,5 @@
 import { getWfClient } from 'src/lib/temporalClient'
-import { WorkflowA, WorkflowB } from 'temporal-workflows/lib/all-workflows'
+import { WorkflowA, WorkflowB } from 'temporal-workflows/dist/all-workflows'
 
 export async function runWorkflow({ wfId }) {
   const client = getWfClient()

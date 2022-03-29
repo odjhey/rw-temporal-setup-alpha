@@ -1,10 +1,9 @@
 import { getWfClient } from 'src/lib/temporalClient'
-import {
-  isBlockedQuery,
-  WorkflowUnblockOrCancel,
-  unblockSignal,
-  statusQuery,
-} from 'temporal-workflows/lib/all-workflows'
+
+import { Workflows } from 'temporal-workflows'
+
+const { isBlockedQuery, WorkflowUnblockOrCancel, unblockSignal, statusQuery } =
+  Workflows
 
 export async function runWorkflow({
   wfId,

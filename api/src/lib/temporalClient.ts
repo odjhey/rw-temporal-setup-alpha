@@ -1,5 +1,5 @@
 import { Connection, WorkflowClient } from '@temporalio/client'
-import { WorkflowA, WorkflowB } from 'temporal-workflows/lib/all-workflows'
+import { WorkflowA, WorkflowB } from 'temporal-workflows/dist/all-workflows'
 
 export async function runWorkflow() {
   const connection = new Connection() // Connect to localhost with default ConnectionOptions.
