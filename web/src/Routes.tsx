@@ -11,10 +11,14 @@ import { Set, Router, Route } from '@redwoodjs/router'
 import WorkflowRunResultsLayout from 'src/layouts/WorkflowRunResultsLayout'
 import WorkflowRunSourcesLayout from 'src/layouts/WorkflowRunSourcesLayout'
 import WorkflowRunsLayout from 'src/layouts/WorkflowRunsLayout'
+import TestRunWfLayout from 'src/layouts/TestRunWfLayout'
 
 const Routes = () => {
   return (
     <Router>
+      <Set wrap={TestRunWfLayout}>
+        <Route path="/test-run-wf" page={TestRunWfPage} name="testRunWf" />
+      </Set>
       <Set wrap={WorkflowRunResultsLayout}>
         <Route path="/workflow-run-results/new" page={WorkflowRunResultNewWorkflowRunResultPage} name="newWorkflowRunResult" />
         <Route path="/workflow-run-results/{id:Int}/edit" page={WorkflowRunResultEditWorkflowRunResultPage} name="editWorkflowRunResult" />
