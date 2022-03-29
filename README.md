@@ -58,3 +58,6 @@ validate x10
 ## notes
 1. try to implement the source-sink pattern (or pumps), see https://github.com/agmen-hu/node-datapumps for inspiration
 1. we get value in a common module to get file url (remote csv), as most libs operate in such manner
+
+## activity
+1. one could be someone that does something like, source-transform-sink
