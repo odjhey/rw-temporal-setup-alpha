@@ -19,7 +19,11 @@ export const streamReader = async (readable: Readable) => {
       const jsa = XLSX.utils.sheet_to_json(
         workbook.Sheets[workbook.SheetNames[0]]
       )
+
+      resolve(jsa)
+
       // console.log('first sheet', jsa)
+      /*
 
       const zodNumberOrString = z.string().or(z.number())
       const epodSchema = z.array(
@@ -60,6 +64,7 @@ export const streamReader = async (readable: Readable) => {
       } else {
         resolve({ data: res.data, error: undefined })
       }
+      */
 
       /*
 Delivery: 1120110001,

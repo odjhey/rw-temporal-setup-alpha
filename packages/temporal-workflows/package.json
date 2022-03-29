@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@prisma/client": "3.11.0",
+    "danfojs-node": "^1.0.4",
+    "data-forge": "^1.9.5",
     "minio": "^7.0.26",
     "temporalio": "0.19.x",
     "xlsx": "^0.18.5",
