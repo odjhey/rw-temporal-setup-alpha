@@ -3,10 +3,8 @@
 - https://redwoodjs.com/
 - https://temporal.io/
 - https://min.io/
-
-### checkout
+- https://github.com/sheetjs/sheetjs
 - https://danfo.jsdata.org/
-- https://github.com/data-forge/data-forge-ts
 
 ## todo
 
