@@ -25,3 +25,14 @@ model WorkflowRunSource {
   id   Int    @id @default(autoincrement())
   slug String
 }
+
+model RawData {
+  id      String @id @default(cuid())
+  idx     Int    @default(autoincrement())
+  ref     String
+  rawJson Json
+
+  // created by, updated by, etc etc
+
+  @@unique([idx, ref])
+}

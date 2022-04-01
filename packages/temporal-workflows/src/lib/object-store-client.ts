@@ -63,3 +63,12 @@ export const getFileList = async (client: Minio.Client) => {
   })
   return files
 }
+
+// see if better to accept events instead of returning the stream
+export const getFileAsStream = async (
+  client: Minio.Client,
+  { bucket, filePath }: { bucket: string; filePath: string }
+): Promise<Readable> => {
+  const readStream = await client.getObject(bucket, filePath)
+  return readStream
+}

@@ -27,5 +27,7 @@ export async function activityReadNumbers({
 
   const readable = await readFileStream(getClient(), { bucket, filePath })
   const result = await streamReader(readable)
-  return await saveResult({ wfId, result })
+  await saveResult({ wfId, result })
 }
+
+// input -> logic -> save -> result saveId
