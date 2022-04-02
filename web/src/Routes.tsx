@@ -8,6 +8,7 @@
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
 import { Set, Router, Route } from '@redwoodjs/router'
+import AnalysisResultsLayout from 'src/layouts/AnalysisResultsLayout'
 import WorkflowRunResultsLayout from 'src/layouts/WorkflowRunResultsLayout'
 import WorkflowRunSourcesLayout from 'src/layouts/WorkflowRunSourcesLayout'
 import WorkflowRunsLayout from 'src/layouts/WorkflowRunsLayout'
@@ -16,6 +17,12 @@ import TestRunWfLayout from 'src/layouts/TestRunWfLayout'
 const Routes = () => {
   return (
     <Router>
+      <Set wrap={AnalysisResultsLayout}>
+        <Route path="/analysis-results/new" page={AnalysisResultNewAnalysisResultPage} name="newAnalysisResult" />
+        <Route path="/analysis-results/{id}/edit" page={AnalysisResultEditAnalysisResultPage} name="editAnalysisResult" />
+        <Route path="/analysis-results/{id}" page={AnalysisResultAnalysisResultPage} name="analysisResult" />
+        <Route path="/analysis-results" page={AnalysisResultAnalysisResultsPage} name="analysisResults" />
+      </Set>
       <Set wrap={TestRunWfLayout}>
         <Route path="/test-run-wf" page={TestRunWfPage} name="testRunWf" />
       </Set>
