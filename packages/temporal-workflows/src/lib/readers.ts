@@ -1,6 +1,7 @@
 import * as XLSX from 'xlsx'
 import { Readable } from 'stream'
 
+// TODO: see if need to change based on mime/file extension
 export const serializeStream = async (readable: Readable) => {
   return await new Promise((resolve, reject) => {
     const buffers: any[] = []
