@@ -1,14 +1,6 @@
-import { useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/toast'
-import { Link, routes, navigate } from '@redwoodjs/router'
-
-const DELETE_ANALYSIS_RESULT_MUTATION = gql`
-  mutation DeleteAnalysisResultMutation($id: String!) {
-    deleteAnalysisResult(id: $id) {
-      id
-    }
-  }
-`
+import { Group, Table, Title } from '@mantine/core'
+import ColumnsSummaryDataTable from './ColumnsSummaryDataTable'
+import SampleDataTable from './SampleDataTable'
 
 const jsonDisplay = (obj) => {
   return (
@@ -29,33 +21,16 @@ const timeTag = (datetime) => {
 }
 
 const AnalysisResult = ({ analysisResult }) => {
-  const [deleteAnalysisResult] = useMutation(DELETE_ANALYSIS_RESULT_MUTATION, {
-    onCompleted: () => {
-      toast.success('AnalysisResult deleted')
-      navigate(routes.analysisResults())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
-
-  const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete analysisResult ' + id + '?')) {
-      deleteAnalysisResult({ variables: { id } })
-    }
-  }
-
-  console.log('aa', analysisResult)
-
+  // TODO: check schema version first
+  const { sample, columns, columnsSummary, ...rest } = analysisResult.rawJson
+  console.log(rest)
   return (
     <>
-      <div className="rw-segment">
-        <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">
-            AnalysisResult {analysisResult.id} Detail
-          </h2>
-        </header>
-        <table className="rw-table">
+      <header>
+        <Title order={1}>AnalysisResult {analysisResult.id} Detail</Title>
+      </header>
+      <Group py={'xl'}>
+        <Table highlightOnHover striped>
           <tbody>
             <tr>
               <th>Id</th>
@@ -79,30 +54,17 @@ const AnalysisResult = ({ analysisResult }) => {
             </tr>
             <tr>
               <th>Raw json</th>
-              <td>{jsonDisplay(analysisResult.rawJson)}</td>
+              <td>{jsonDisplay(rest)}</td>
             </tr>
             <tr>
               <th>Schema version</th>
               <td>{analysisResult.schemaVersion}</td>
             </tr>
           </tbody>
-        </table>
-      </div>
-      <nav className="rw-button-group">
-        <Link
-          to={routes.editAnalysisResult({ id: analysisResult.id })}
-          className="rw-button rw-button-blue"
-        >
-          Edit
-        </Link>
-        <button
-          type="button"
-          className="rw-button rw-button-red"
-          onClick={() => onDeleteClick(analysisResult.id)}
-        >
-          Delete
-        </button>
-      </nav>
+        </Table>
+        <ColumnsSummaryDataTable data={columnsSummary} />
+        <SampleDataTable columns={columns} sample={sample} />
+      </Group>
     </>
   )
 }
