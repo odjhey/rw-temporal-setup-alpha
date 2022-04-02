@@ -1,11 +1,11 @@
-datasource db {
-  provider = "postgres"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = "native"
+  binaryTargets = ["native"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model WorkflowRun {
@@ -27,4 +27,23 @@ model WorkflowRunResult {
   result             Json
 
   // link to workflow run
+}
+
+model AnalysisResult {
+  id            String   @id
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime
+  ref           String   @unique
+  source        String
+  rawJson       Json
+  schemaVersion String
+}
+
+model RawData {
+  id      String @id
+  ref     String
+  rawJson Json
+  idx     Int    @default(autoincrement())
+
+  @@unique([idx, ref])
 }
