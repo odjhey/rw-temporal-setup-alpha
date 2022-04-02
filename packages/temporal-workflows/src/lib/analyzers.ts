@@ -23,7 +23,7 @@ export const analyzeRawFrame = async (rawFrame: any[]) => {
   })
 
   const summary = {
-    schemaVersion: '0.01',
+    schemaVersion: '0.0.1',
     rowCount,
     colCount,
     columns,

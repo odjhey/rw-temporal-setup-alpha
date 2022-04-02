@@ -1,7 +1,8 @@
+import { nanoid } from 'nanoid'
 import { analyzeRawFrame } from '../lib/analyzers'
 import { getClient, getFileAsStream } from '../lib/object-store-client'
 import { serializeStream } from '../lib/readers'
-import * as RawDataRepo from '../lib/repos/raw-data'
+import * as AnalysisRepo from '../lib/repos/analysis'
 
 export async function activityReadAndSaveRaw({
   bucket,
@@ -19,13 +20,15 @@ export async function activityReadAndSaveRaw({
 
   console.log(analysis)
 
-  /*
-  const saveId = await RawDataRepo.saveResultMultiple({
-    results: result as any[],
+  // TODO: add typing to saveResult
+  const saveId = await AnalysisRepo.saveResult({
+    ref: `${bucket}/${filePath}--${nanoid(10)}`,
+    result: analysis,
+    source: `${bucket}/${filePath}`,
+    schemaVersion: analysis.schemaVersion,
   })
 
   return saveId.refId
-  */
 }
 
 // input -> logic -> save -> result saveId
