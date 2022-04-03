@@ -19,9 +19,9 @@ const SampleDataTable = ({ columns, sample }) => {
   })
 
   return (
-    <Group sx={{ maxWidth: '100vw' }}>
+    <Group direction="column">
       <Title order={2}>Random Sample</Title>
-      <ScrollArea>
+      <ScrollArea sx={{ maxWidth: '100vw' }}>
         <Table
           highlightOnHover
           striped

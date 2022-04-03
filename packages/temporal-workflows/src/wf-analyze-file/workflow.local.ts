@@ -12,6 +12,6 @@ const runLocal: typeof WorkflowUnblockOrCancel = async ({
 ;(() => {
   runLocal({
     bucket: 'bucket123',
-    filePath: 'some-epod-excel',
+    filePath: 'file123-for-deliveries',
   })
 })()

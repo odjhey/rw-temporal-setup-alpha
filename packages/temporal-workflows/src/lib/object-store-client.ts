@@ -72,3 +72,12 @@ export const getFileAsStream = async (
   const readStream = await client.getObject(bucket, filePath)
   return readStream
 }
+
+// TODO: merge this with getfileasstream
+export const getFileStat = async (
+  client: Minio.Client,
+  { bucket, filePath }: { bucket: string; filePath: string }
+): Promise<Minio.BucketItemStat> => {
+  const stats = await client.statObject(bucket, filePath)
+  return stats
+}

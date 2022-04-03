@@ -1,6 +1,10 @@
 import { nanoid } from 'nanoid'
 import { analyzeRawFrame } from '../lib/analyzers'
-import { getClient, getFileAsStream } from '../lib/object-store-client'
+import {
+  getClient,
+  getFileAsStream,
+  getFileStat,
+} from '../lib/object-store-client'
 import { serializeStream } from '../lib/readers'
 import * as AnalysisRepo from '../lib/repos/analysis'
 
@@ -15,6 +19,7 @@ export async function activityReadAndSaveRaw({
 
   const readable = await getFileAsStream(getClient(), { bucket, filePath })
   const result = await serializeStream(readable)
+  const fileStat = await getFileStat(getClient(), { bucket, filePath })
 
   const analysis = await analyzeRawFrame(result as any[])
 
@@ -23,7 +28,7 @@ export async function activityReadAndSaveRaw({
   // TODO: add typing to saveResult
   const saveId = await AnalysisRepo.saveResult({
     ref: `${bucket}/${filePath}--${nanoid(10)}`,
-    result: analysis,
+    result: { ...analysis, fileStat },
     source: `${bucket}/${filePath}`,
     schemaVersion: analysis.schemaVersion,
   })
